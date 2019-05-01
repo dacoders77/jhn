@@ -12,9 +12,7 @@ class BitmexWsListener
 {
     public static $console;
     public static function subscribe($connector, $loop, $console){
-
         self::$console = $console;
-
         /** Pick up the right websocket endpoint accordingly to the exchange */
         $exchangeWebSocketEndPoint = "wss://www.bitmex.com/realtime";
         $connector($exchangeWebSocketEndPoint, [], ['Origin' => 'http://localhost'])

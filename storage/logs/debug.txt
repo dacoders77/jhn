@@ -1,0 +1,2 @@
+2019-05-01 19:18:53 W:\domains\jhn.kk\app\Listeners\ExampleEventSubscriber.php warm up cache
+2019-05-01 19:23:41 W:\domains\jhn.kk\app\Console\Commands\test.php DELEGATE FROM CONSOLE

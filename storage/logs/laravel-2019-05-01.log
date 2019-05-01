@@ -1,0 +1,212 @@
+[2019-05-01 19:29:52] local.ERROR: Argument 1 passed to App\Events\ClearCache::__construct() must be of the type array, null given, called in W:\domains\jhn.kk\app\Console\Commands\derebit.php on line 83 {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Argument 1 passed to App\\Events\\ClearCache::__construct() must be of the type array, null given, called in W:\\domains\\jhn.kk\\app\\Console\\Commands\\derebit.php on line 83 at W:\\domains\\jhn.kk\\app\\Events\\ClearCache.php:22)
+[stacktrace]
+#0 W:\\domains\\jhn.kk\\app\\Console\\Commands\\derebit.php(83): App\\Events\\ClearCache->__construct(NULL)
+#1 W:\\domains\\jhn.kk\\vendor\\evenement\\evenement\\src\\Evenement\\EventEmitterTrait.php(123): App\\Console\\Commands\\derebit->App\\Console\\Commands\\{closure}(Object(Ratchet\\RFC6455\\Messaging\\Message), Object(Ratchet\\Client\\WebSocket))
+#2 W:\\domains\\jhn.kk\\vendor\atchet\\pawl\\src\\WebSocket.php(72): Ratchet\\Client\\WebSocket->emit('message', Array)
+#3 W:\\domains\\jhn.kk\\vendor\atchet\fc6455\\src\\Messaging\\MessageBuffer.php(108): Ratchet\\Client\\WebSocket->Ratchet\\Client\\{closure}(Object(Ratchet\\RFC6455\\Messaging\\Message))
+#4 W:\\domains\\jhn.kk\\vendor\atchet\fc6455\\src\\Messaging\\MessageBuffer.php(60): Ratchet\\RFC6455\\Messaging\\MessageBuffer->processData('\\x81~\\x00\\x94{\"jsonrpc\":...')
+#5 W:\\domains\\jhn.kk\\vendor\\evenement\\evenement\\src\\Evenement\\EventEmitterTrait.php(123): Ratchet\\RFC6455\\Messaging\\MessageBuffer->onData('\\x81~\\x00\\x94{\"jsonrpc\":...')
+#6 W:\\domains\\jhn.kk\\vendor\eact\\stream\\src\\Util.php(71): Evenement\\EventEmitter->emit('data', Array)
+#7 W:\\domains\\jhn.kk\\vendor\\evenement\\evenement\\src\\Evenement\\EventEmitterTrait.php(123): React\\Stream\\Util::React\\Stream\\{closure}('\\x81~\\x00\\x94{\"jsonrpc\":...')
+#8 W:\\domains\\jhn.kk\\vendor\eact\\stream\\src\\DuplexResourceStream.php(193): Evenement\\EventEmitter->emit('data', Array)
+#9 W:\\domains\\jhn.kk\\vendor\eact\\event-loop\\src\\StreamSelectLoop.php(244): React\\Stream\\DuplexResourceStream->handleData(Resource id #476)
+#10 W:\\domains\\jhn.kk\\vendor\eact\\event-loop\\src\\StreamSelectLoop.php(211): React\\EventLoop\\StreamSelectLoop->waitForStreamActivity(NULL)
+#11 W:\\domains\\jhn.kk\\app\\Console\\Commands\\derebit.php(112): React\\EventLoop\\StreamSelectLoop->run()
+#12 [internal function]: App\\Console\\Commands\\derebit->handle()
+#13 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): call_user_func_array(Array, Array)
+#14 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(90): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#15 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(34): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#16 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(576): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#17 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#18 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#19 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#20 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(908): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(269): Symfony\\Component\\Console\\Application->doRunCommand(Object(App\\Console\\Commands\\derebit), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(145): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(90): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#24 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(122): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#25 W:\\domains\\jhn.kk\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 {main}
+"} 
+[2019-05-01 19:52:07] local.ERROR: Class 'League\Flysystem\Cached\Storage\AbstractCache' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 1): Class 'League\\Flysystem\\Cached\\Storage\\AbstractCache' not found at W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Cache.php:8)
+[stacktrace]
+#0 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(137): Symfony\\Component\\Debug\\Exception\\FatalErrorException->__construct()
+#1 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(123): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->fatalExceptionFromError()
+#2 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(0): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleShutdown()
+#3 W:\\domains\\jhn.kk\\vendor\\composer\\ClassLoader.php(444): ()
+#4 W:\\domains\\jhn.kk\\vendor\\composer\\ClassLoader.php(322): Composer\\Autoload\\includeFile()
+#5 W:\\domains\\jhn.kk\\app\\Console\\Commands\\test.php(42): Composer\\Autoload\\ClassLoader->loadClass()
+#6 W:\\domains\\jhn.kk\\app\\Console\\Commands\\test.php(42): spl_autoload_call()
+#7 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): App\\Console\\Commands\\test->handle()
+#8 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): call_user_func_array:{W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php:32}()
+#9 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(90): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#10 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(34): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#11 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(576): Illuminate\\Container\\BoundMethod::call()
+#12 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Foundation\\Application->call()
+#13 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Command\\Command.php(255): App\\Console\\Commands\\test->execute()
+#14 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): App\\Console\\Commands\\test->run()
+#15 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(908): App\\Console\\Commands\\test->run()
+#16 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(269): Illuminate\\Console\\Application->doRunCommand()
+#17 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(145): Illuminate\\Console\\Application->doRun()
+#18 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(90): Illuminate\\Console\\Application->run()
+#19 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(122): Illuminate\\Console\\Application->run()
+#20 W:\\domains\\jhn.kk\\artisan(37): App\\Console\\Kernel->handle()
+#21 W:\\domains\\jhn.kk\\artisan(0): {main}()
+#22 {main}
+"} 
+[2019-05-01 19:53:25] local.ERROR: Command "event:generatecls" is not defined.
+
+Did you mean one of these?
+    event:cache
+    event:clear
+    event:generate
+    event:list
+    key:generate {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"event:generatecls\" is not defined.
+
+Did you mean one of these?
+    event:cache
+    event:clear
+    event:generate
+    event:list
+    key:generate at W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php:639)
+[stacktrace]
+#0 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(233): Symfony\\Component\\Console\\Application->find('event:generatec...')
+#1 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(145): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(90): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(122): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 W:\\domains\\jhn.kk\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2019-05-01 20:19:17] local.ERROR: Class 'App\Classes\Logic\Delete' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Classes\\Logic\\Delete' not found at W:\\domains\\jhn.kk\\app\\Console\\Commands\\cryptofac.php:55)
+[stacktrace]
+#0 [internal function]: App\\Console\\Commands\\cryptofac->handle()
+#1 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): call_user_func_array(Array, Array)
+#2 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(90): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#3 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(34): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#4 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(576): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#5 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#6 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#7 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#8 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(908): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(269): Symfony\\Component\\Console\\Application->doRunCommand(Object(App\\Console\\Commands\\cryptofac), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(145): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(90): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(122): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#13 W:\\domains\\jhn.kk\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 {main}
+"} 
+[2019-05-01 20:20:49] local.ERROR: Class 'App\Classes\Logic\OrderBooksWatch' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Classes\\Logic\\OrderBooksWatch' not found at W:\\domains\\jhn.kk\\app\\Console\\Commands\\cryptofac.php:56)
+[stacktrace]
+#0 [internal function]: App\\Console\\Commands\\cryptofac->handle()
+#1 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): call_user_func_array(Array, Array)
+#2 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(90): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#3 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(34): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#4 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(576): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#5 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#6 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#7 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#8 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(908): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(269): Symfony\\Component\\Console\\Application->doRunCommand(Object(App\\Console\\Commands\\cryptofac), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(145): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(90): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(122): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#13 W:\\domains\\jhn.kk\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 {main}
+"} 
+[2019-05-01 20:20:54] local.ERROR: Class 'App\Classes\Logic\OrderBooksWatch' not found {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalThrowableError(code: 0): Class 'App\\Classes\\Logic\\OrderBooksWatch' not found at W:\\domains\\jhn.kk\\app\\Console\\Commands\\derebit.php:50)
+[stacktrace]
+#0 [internal function]: App\\Console\\Commands\\derebit->handle()
+#1 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): call_user_func_array(Array, Array)
+#2 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(90): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#3 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(34): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#4 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(576): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#5 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#6 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#7 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#8 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(908): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(269): Symfony\\Component\\Console\\Application->doRunCommand(Object(App\\Console\\Commands\\derebit), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(145): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(90): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(122): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#13 W:\\domains\\jhn.kk\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 {main}
+"} 
+[2019-05-01 20:22:59] local.ERROR: Use of undefined constant this - assumed 'this' {"exception":"[object] (ErrorException(code: 0): Use of undefined constant this - assumed 'this' at W:\\domains\\jhn.kk\\app\\Console\\Commands\\derebit.php:50)
+[stacktrace]
+#0 W:\\domains\\jhn.kk\\app\\Console\\Commands\\derebit.php(50): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Use of undefine...', 'W:\\\\domains\\\\jhn....', 50, Array)
+#1 [internal function]: App\\Console\\Commands\\derebit->handle()
+#2 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): call_user_func_array(Array, Array)
+#3 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(90): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#4 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(34): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#5 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(576): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#6 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#7 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#8 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#9 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(908): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(269): Symfony\\Component\\Console\\Application->doRunCommand(Object(App\\Console\\Commands\\derebit), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(145): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(90): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#13 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(122): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#14 W:\\domains\\jhn.kk\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#15 {main}
+"} 
+[2019-05-01 20:23:33] local.ERROR: Undefined property: App\Console\Commands\derebit::$OrderBooksWatch {"exception":"[object] (ErrorException(code: 0): Undefined property: App\\Console\\Commands\\derebit::$OrderBooksWatch at W:\\domains\\jhn.kk\\app\\Console\\Commands\\derebit.php:84)
+[stacktrace]
+#0 W:\\domains\\jhn.kk\\app\\Console\\Commands\\derebit.php(84): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'W:\\\\domains\\\\jhn....', 84, Array)
+#1 W:\\domains\\jhn.kk\\vendor\\evenement\\evenement\\src\\Evenement\\EventEmitterTrait.php(123): App\\Console\\Commands\\derebit->App\\Console\\Commands\\{closure}(Object(Ratchet\\RFC6455\\Messaging\\Message), Object(Ratchet\\Client\\WebSocket))
+#2 W:\\domains\\jhn.kk\\vendor\atchet\\pawl\\src\\WebSocket.php(72): Ratchet\\Client\\WebSocket->emit('message', Array)
+#3 W:\\domains\\jhn.kk\\vendor\atchet\fc6455\\src\\Messaging\\MessageBuffer.php(108): Ratchet\\Client\\WebSocket->Ratchet\\Client\\{closure}(Object(Ratchet\\RFC6455\\Messaging\\Message))
+#4 W:\\domains\\jhn.kk\\vendor\atchet\fc6455\\src\\Messaging\\MessageBuffer.php(60): Ratchet\\RFC6455\\Messaging\\MessageBuffer->processData('\\x81~\\x00\\x94{\"jsonrpc\":...')
+#5 W:\\domains\\jhn.kk\\vendor\\evenement\\evenement\\src\\Evenement\\EventEmitterTrait.php(123): Ratchet\\RFC6455\\Messaging\\MessageBuffer->onData('\\x81~\\x00\\x94{\"jsonrpc\":...')
+#6 W:\\domains\\jhn.kk\\vendor\eact\\stream\\src\\Util.php(71): Evenement\\EventEmitter->emit('data', Array)
+#7 W:\\domains\\jhn.kk\\vendor\\evenement\\evenement\\src\\Evenement\\EventEmitterTrait.php(123): React\\Stream\\Util::React\\Stream\\{closure}('\\x81~\\x00\\x94{\"jsonrpc\":...')
+#8 W:\\domains\\jhn.kk\\vendor\eact\\stream\\src\\DuplexResourceStream.php(193): Evenement\\EventEmitter->emit('data', Array)
+#9 W:\\domains\\jhn.kk\\vendor\eact\\event-loop\\src\\StreamSelectLoop.php(244): React\\Stream\\DuplexResourceStream->handleData(Resource id #475)
+#10 W:\\domains\\jhn.kk\\vendor\eact\\event-loop\\src\\StreamSelectLoop.php(211): React\\EventLoop\\StreamSelectLoop->waitForStreamActivity(NULL)
+#11 W:\\domains\\jhn.kk\\app\\Console\\Commands\\derebit.php(114): React\\EventLoop\\StreamSelectLoop->run()
+#12 [internal function]: App\\Console\\Commands\\derebit->handle()
+#13 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): call_user_func_array(Array, Array)
+#14 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(90): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#15 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(34): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#16 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(576): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#17 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#18 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#19 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#20 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(908): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(269): Symfony\\Component\\Console\\Application->doRunCommand(Object(App\\Console\\Commands\\derebit), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(145): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(90): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#24 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(122): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#25 W:\\domains\\jhn.kk\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 {main}
+"} 
+[2019-05-01 20:29:29] local.ERROR: Undefined property: App\Console\Commands\cryptofac::$OrderBooksWatch {"exception":"[object] (ErrorException(code: 0): Undefined property: App\\Console\\Commands\\cryptofac::$OrderBooksWatch at W:\\domains\\jhn.kk\\app\\Console\\Commands\\cryptofac.php:98)
+[stacktrace]
+#0 W:\\domains\\jhn.kk\\app\\Console\\Commands\\cryptofac.php(98): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(8, 'Undefined prope...', 'W:\\\\domains\\\\jhn....', 98, Array)
+#1 W:\\domains\\jhn.kk\\vendor\\evenement\\evenement\\src\\Evenement\\EventEmitterTrait.php(123): App\\Console\\Commands\\cryptofac->App\\Console\\Commands\\{closure}(Object(Ratchet\\RFC6455\\Messaging\\Message), Object(Ratchet\\Client\\WebSocket))
+#2 W:\\domains\\jhn.kk\\vendor\atchet\\pawl\\src\\WebSocket.php(72): Ratchet\\Client\\WebSocket->emit('message', Array)
+#3 W:\\domains\\jhn.kk\\vendor\atchet\fc6455\\src\\Messaging\\MessageBuffer.php(108): Ratchet\\Client\\WebSocket->Ratchet\\Client\\{closure}(Object(Ratchet\\RFC6455\\Messaging\\Message))
+#4 W:\\domains\\jhn.kk\\vendor\atchet\fc6455\\src\\Messaging\\MessageBuffer.php(60): Ratchet\\RFC6455\\Messaging\\MessageBuffer->processData('\\x81\\x1C{\"event\":\"inf...')
+#5 W:\\domains\\jhn.kk\\vendor\\evenement\\evenement\\src\\Evenement\\EventEmitterTrait.php(123): Ratchet\\RFC6455\\Messaging\\MessageBuffer->onData('\\x81\\x1C{\"event\":\"inf...')
+#6 W:\\domains\\jhn.kk\\vendor\eact\\stream\\src\\Util.php(71): Evenement\\EventEmitter->emit('data', Array)
+#7 W:\\domains\\jhn.kk\\vendor\\evenement\\evenement\\src\\Evenement\\EventEmitterTrait.php(123): React\\Stream\\Util::React\\Stream\\{closure}('\\x81\\x1C{\"event\":\"inf...')
+#8 W:\\domains\\jhn.kk\\vendor\eact\\stream\\src\\DuplexResourceStream.php(193): Evenement\\EventEmitter->emit('data', Array)
+#9 W:\\domains\\jhn.kk\\vendor\eact\\event-loop\\src\\StreamSelectLoop.php(244): React\\Stream\\DuplexResourceStream->handleData(Resource id #475)
+#10 W:\\domains\\jhn.kk\\vendor\eact\\event-loop\\src\\StreamSelectLoop.php(211): React\\EventLoop\\StreamSelectLoop->waitForStreamActivity(NULL)
+#11 W:\\domains\\jhn.kk\\app\\Console\\Commands\\cryptofac.php(125): React\\EventLoop\\StreamSelectLoop->run()
+#12 [internal function]: App\\Console\\Commands\\cryptofac->handle()
+#13 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(32): call_user_func_array(Array, Array)
+#14 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(90): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#15 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\BoundMethod.php(34): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#16 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Container\\Container.php(576): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#17 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(183): Illuminate\\Container\\Container->call(Array)
+#18 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Command\\Command.php(255): Illuminate\\Console\\Command->execute(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#19 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(170): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#20 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(908): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#21 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(269): Symfony\\Component\\Console\\Application->doRunCommand(Object(App\\Console\\Commands\\cryptofac), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#22 W:\\domains\\jhn.kk\\vendor\\symfony\\console\\Application.php(145): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#23 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(90): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#24 W:\\domains\\jhn.kk\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(122): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#25 W:\\domains\\jhn.kk\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#26 {main}
+"} 

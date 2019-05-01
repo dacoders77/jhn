@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_CONNECTION', 'sync'),
+    'default' => env('QUEUE_CONNECTION', 'async'), // sync
 
     /*
     |--------------------------------------------------------------------------
@@ -30,10 +30,15 @@ return [
 
     'connections' => [
 
+        'async' => array(
+            'driver' => 'async',
+            'table' => 'jobs',
+            'queue' => 'default',
+            'expire' => 60,
+        ),
         'sync' => [
             'driver' => 'sync',
         ],
-
         'database' => [
             'driver' => 'database',
             'table' => 'jobs',
