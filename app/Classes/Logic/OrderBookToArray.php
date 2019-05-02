@@ -7,36 +7,58 @@
  */
 
 namespace App\Classes\Logic;
-use function GuzzleHttp\Psr7\str;
 
+/**
+ * Parse Cryptofac order book.
+ * Each event does not contain a fool book, it contains updates only.
+ * We need to make arrays ourselves.
+ *
+ * Class OrderBookToArray
+ * @package App\Classes\Logic
+ */
 class OrderBookToArray
 {
-    private static $bids;
+    public static $bids;
+    public static $asks;
+
     public static function parse($orderBook){
-        foreach ($orderBook as $record){
-            $key = trim($record['price'] . "a", "a");
+        foreach ($orderBook['bids'] as $record){
+            $key = trim($record['price'] . "a", "a"); // Added 'a' and removed it. Needed for type conversion. May be not needed anymore
             self::$bids[$key] = $record['qty'];
         }
-        //dump(self::$bids);
-        //die();
+        foreach ($orderBook['asks'] as $record){
+            $key = trim($record['price'] . "a", "a");
+            self::$asks[$key] = $record['qty'];
+        }
     }
 
     public static function update($orderBookDeltaUpdate){
-        if ($orderBookDeltaUpdate['side'] == 'buy'){ // && self::$bids
-            //dump($orderBookDeltaUpdate);
-            //dump(self::$bids);
-            // If volume = 0
-            // Delete this key from the array
+        if ($orderBookDeltaUpdate['side'] == 'buy'){
+            // If volume = 0, remove this key from the array
             if ($orderBookDeltaUpdate['qty'] == 0){
                 unset(self::$bids[$orderBookDeltaUpdate['price']]);
             } else {
-                // Else
-                // Find a key
-                // Update value
-                self::$bids[$orderBookDeltaUpdate['price']] = $orderBookDeltaUpdate['qty'];
+                self::$bids[$orderBookDeltaUpdate['price']] = $orderBookDeltaUpdate['qty']; // Find the key, update the value
             }
         krsort(self::$bids);
-        dump(self::$bids);
         }
+
+        if ($orderBookDeltaUpdate['side'] == 'sell'){ // && self::$bids
+            if ($orderBookDeltaUpdate['qty'] == 0){
+                unset(self::$asks[$orderBookDeltaUpdate['price']]);
+            } else {
+                self::$asks[$orderBookDeltaUpdate['price']] = $orderBookDeltaUpdate['qty'];
+            }
+        krsort(self::$asks);
+        }
+
+        return([
+            'bids' => self::$bids,
+            'asks' => self::$asks
+        ]);
+    }
+
+    private function updateBook(){
+        //
     }
 }

@@ -7,6 +7,8 @@
  */
 
 namespace App\Classes\Logic;
+use App\Console\Commands\cryptofac;
+use App\Console\Commands\derebit;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -18,6 +20,7 @@ use Illuminate\Support\Facades\Cache;
 class OrderBooksWatch
 {
     private $console;
+    private $books;
 
     public function __construct($console)
     {
@@ -26,10 +29,24 @@ class OrderBooksWatch
 
     public function check($leg){
 
-        // Access cache
-        // Get Cryptofac value
+        if (Cache::get('isDerebitOrderBookReceived') && Cache::get('isCryptoFacOrderBookReceived')){
 
-        // if (derebit && Cryptofas) => hohoh
+            // Get both books from cache
+            $this->books = [
+                'derebit' => Cache::get('derebitBook'),
+                'cryptoFac' => Cache::get('cryptoFacBook')
+            ];
+
+
+            Cache::put('consoleRead', $this->books, now()->addMinute(1));
+        }
+        else {
+            Cache::put('consoleRead', 'Not both books. Current book: ' . $leg, now()->addMinute(1));
+        }
+
+
+
+        /*// if (derebit && Cryptofas) => execute
         if (Cache::get('cryptoFac')){
 
             //$this->console->error('Both order books are ready');
@@ -45,6 +62,6 @@ class OrderBooksWatch
         }
         else{
             dump(__FILE__ . ' Waiting for CryptoFac ');
-        }
+        }*/
     }
 }

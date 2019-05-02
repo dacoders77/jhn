@@ -37,12 +37,14 @@ class CryptofacWsListener {
             ->then(function(\Ratchet\Client\WebSocket $conn) use ($loop) {
                 $conn->on('message', function(\Ratchet\RFC6455\Messaging\MessageInterface $socketMessage) use ($conn, $loop) {
                     $jsonMessage = json_decode($socketMessage->getPayload(), true);
+
                     if (array_key_exists('bids', $jsonMessage)) {
                         OrderBookToArray::parse($jsonMessage['bids']);
                     }
                     if (array_key_exists('feed', $jsonMessage) && array_key_exists('side', $jsonMessage)) {
                         if ($jsonMessage['feed'] == 'book') OrderBookToArray::update($jsonMessage);
                     }
+
                 });
 
                 $conn->on('close', function($code = null, $reason = null) use ($loop) {

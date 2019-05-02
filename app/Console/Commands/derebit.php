@@ -15,6 +15,7 @@ class derebit extends Command
 {
     protected $connection;
     private $orderBooksWatch;
+    public static $isDerebitOrderBookReceived;
 
     /**
      * The name and signature of the console command.
@@ -73,15 +74,16 @@ class derebit extends Command
                 $this->connection = $conn; // In order to use $conn outside of this function
                 $conn->on('message', function(\Ratchet\RFC6455\Messaging\MessageInterface $socketMessage) use ($conn, $loop) {
                     $jsonMessage = json_decode($socketMessage->getPayload(), true);
-                    // dump($jsonMessage);
-                    /*if (array_key_exists('data', $jsonMessage)){
-                        if (array_key_exists('lastPrice', $jsonMessage['data'][0])){
-                            WebSocketStream::Parse($jsonMessage['data']); // Update quotes, send events to vue
-                            WebSocketStream::stopLossCheck($jsonMessage['data']); // Stop loss execution
-                        }
-                    }*/
 
-                    $this->orderBooksWatch->check("derebit");
+                    if (array_key_exists('params', $jsonMessage))
+                        if (array_key_exists('data', $jsonMessage['params']))
+                            if (array_key_exists('bids', $jsonMessage['params']['data'])){
+                                dump($jsonMessage);
+                                Cache::put('isDerebitOrderBookReceived', true, now()->addDay(1));
+                                Cache::put('derebitBook', $jsonMessage, now()->addMinute(1));
+                                $this->orderBooksWatch->check("derebit");
+                            }
+
 
                 });
 

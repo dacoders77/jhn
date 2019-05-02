@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Classes\Logic\Delete;
 use App\Classes\Logic\OrderBooksWatch;
+use App\Classes\Logic\OrderBookToArray;
 use App\Classes\WebSocketStream;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
@@ -21,6 +22,7 @@ class cryptofac extends Command
 {
     protected $connection;
     private $orderBooksWatch;
+    public static $isOrderBookReceived;
 
     /**
      * The name and signature of the console command.
@@ -79,23 +81,34 @@ class cryptofac extends Command
          * Cryptofac Websocket end point
          * @see https://www.cryptofacilities.com/resources/hc/en-us/articles/360018976314-Conformance-Testing-Environment
          */
-        $exchangeWebSocketEndPoint = "wss://conformance.cryptofacilities.com/ws/v1";
+
+        //$exchangeWebSocketEndPoint = "wss://conformance.cryptofacilities.com/ws/v1";
+        $exchangeWebSocketEndPoint = "wss://www.cryptofacilities.com/ws/v1";
 
         $connector($exchangeWebSocketEndPoint, [], ['Origin' => 'http://localhost'])
             ->then(function(\Ratchet\Client\WebSocket $conn) use ($loop) {
                 $this->connection = $conn; // In order to use $conn outside of this function
                 $conn->on('message', function(\Ratchet\RFC6455\Messaging\MessageInterface $socketMessage) use ($conn, $loop) {
                     $jsonMessage = json_decode($socketMessage->getPayload(), true);
-                    // dump($jsonMessage);
-                    if (array_key_exists('data', $jsonMessage)){
-                        if (array_key_exists('lastPrice', $jsonMessage['data'][0])){
-                            // WebSocketStream::Parse($jsonMessage['data']); // Update quotes, send events to vue
-                            // WebSocketStream::stopLossCheck($jsonMessage['data']); // Stop loss execution
-                        }
+                    dump($jsonMessage);
+
+                    if (array_key_exists('bids', $jsonMessage)) {
+                        OrderBookToArray::parse($jsonMessage);
+                        Cache::put('isCryptoFacOrderBookReceived', true, now()->addDay(1));
+
+                    }
+                    if (array_key_exists('feed', $jsonMessage) && array_key_exists('side', $jsonMessage)) {
+                        if ($jsonMessage['feed'] == 'book') OrderBookToArray::update($jsonMessage);
+                        $this->orderBooksWatch->check('cryptoFac');
+                        Cache::put('cryptoFacBook', OrderBookToArray::update($jsonMessage), now()->addMinute(1));
                     }
 
-                    Cache::put('cryptoFac', $jsonMessage, now()->addMinute(5)); // Clear the cache. Assigned value Expires in 5 minutes
-                    $this->orderBooksWatch->check("cryptoFac");
+                    // $arr = ['bids' => OrderBookToArray::$asks, 'asks' => OrderBookToArray::$bids];
+                    // dump($arr);
+
+                    // Cryptofac order book needs to be parsed. Because the they send updates insted of a book.
+                    //Cache::put('cryptoFac', $jsonMessage, now()->addMinute(5)); // Clear the cache. Assigned value Expires in 5 minutes
+                    //$this->orderBooksWatch->check("cryptoFac");
 
                 });
 
