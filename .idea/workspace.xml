@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3ff4707-0aea-4d25-a882-9b03c4d11a62" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Classes/Logic/OrderBookCache.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Classes/Logic/OrderBookToArray.php" afterPath="$PROJECT_DIR$/app/Classes/Logic/OrderBookToArray.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Classes/Logic/OrderBooksWatch.php" afterPath="$PROJECT_DIR$/app/Classes/Logic/OrderBooksWatch.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Classes/Trading/CryptofacWsListener.php" afterPath="$PROJECT_DIR$/app/Classes/Trading/CryptofacWsListener.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/cryptofac.php" afterPath="$PROJECT_DIR$/app/Console/Commands/cryptofac.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/derebit.php" afterPath="$PROJECT_DIR$/app/Console/Commands/derebit.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Console/Commands/test.php" afterPath="$PROJECT_DIR$/app/Console/Commands/test.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/logs/laravel-2019-05-01.log" afterPath="$PROJECT_DIR$/storage/logs/laravel-2019-05-01.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage/logs/laravel-2019-05-02.log" afterPath="$PROJECT_DIR$/storage/logs/laravel-2019-05-02.log" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -36,8 +32,8 @@
       <file leaf-file-name="cryptofac.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Console/Commands/cryptofac.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="96" column="88" lean-forward="false" selection-start-line="96" selection-start-column="88" selection-end-line="96" selection-end-column="88" />
+            <state relative-caret-position="153">
+              <caret line="92" column="20" lean-forward="true" selection-start-line="92" selection-start-column="20" selection-end-line="92" selection-end-column="20" />
               <folding>
                 <element signature="e#40#69#0#PHP" expanded="true" />
               </folding>
@@ -45,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrderBookToArray.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="OrderBookToArray.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Classes/Logic/OrderBookToArray.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+            <state relative-caret-position="342">
+              <caret line="57" column="9" lean-forward="false" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -58,7 +54,7 @@
       <file leaf-file-name="OrderBooksWatch.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Classes/Logic/OrderBooksWatch.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
+            <state relative-caret-position="17">
               <caret line="37" column="14" lean-forward="false" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
               <folding>
                 <element signature="e#122#157#0#PHP" expanded="true" />
@@ -67,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Console/Commands/test.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="54" column="16" lean-forward="false" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+            <state relative-caret-position="343">
+              <caret line="69" column="52" lean-forward="false" selection-start-line="69" selection-start-column="52" selection-end-line="69" selection-end-column="52" />
               <folding>
                 <element signature="e#39#70#0#PHP" expanded="true" />
               </folding>
@@ -85,7 +81,16 @@
     <findStrings>
       <find>pth</find>
       <find>ExampleEventSubscriber</find>
+      <find>arr2</find>
+      <find>derebitAsks</find>
+      <find>$this-&gt;arr</find>
+      <find>$cryptoFacData</find>
     </findStrings>
+    <replaceStrings>
+      <replace>derebitAsks</replace>
+      <replace>booksData</replace>
+      <replace>$cryptoFacAsks</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -125,8 +130,8 @@
         <option value="$PROJECT_DIR$/app/Classes/Logic/Delete.php" />
         <option value="$PROJECT_DIR$/app/Classes/Trading/CryptofacWsListener.php" />
         <option value="$PROJECT_DIR$/app/Classes/Logic/OrderBooksWatch.php" />
-        <option value="$PROJECT_DIR$/app/Classes/Logic/OrderBookToArray.php" />
         <option value="$PROJECT_DIR$/app/Console/Commands/derebit.php" />
+        <option value="$PROJECT_DIR$/app/Classes/Logic/OrderBookToArray.php" />
         <option value="$PROJECT_DIR$/app/Console/Commands/cryptofac.php" />
         <option value="$PROJECT_DIR$/app/Console/Commands/test.php" />
       </list>
@@ -289,12 +294,12 @@
       <workItem from="1556327873302" duration="5821000" />
       <workItem from="1556733196793" duration="26428000" />
       <workItem from="1556810158192" duration="2081000" />
-      <workItem from="1556826849980" duration="1501000" />
+      <workItem from="1556826849980" duration="5820000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80202000" />
+    <option name="totallyTimeSpent" value="84521000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -613,16 +618,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Classes/Logic/OrderBooksWatch.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="37" column="14" lean-forward="false" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
-          <folding>
-            <element signature="e#122#157#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Commands/derebit.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -633,10 +628,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Classes/Logic/OrderBooksWatch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="37" column="14" lean-forward="false" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
+          <folding>
+            <element signature="e#122#157#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Classes/Logic/OrderBookToArray.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="57" column="9" lean-forward="false" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Commands/cryptofac.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="96" column="88" lean-forward="false" selection-start-line="96" selection-start-column="88" selection-end-line="96" selection-end-column="88" />
+        <state relative-caret-position="153">
+          <caret line="92" column="20" lean-forward="true" selection-start-line="92" selection-start-column="20" selection-end-line="92" selection-end-column="20" />
           <folding>
             <element signature="e#40#69#0#PHP" expanded="true" />
           </folding>
@@ -645,19 +658,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Console/Commands/test.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="54" column="16" lean-forward="false" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
+        <state relative-caret-position="343">
+          <caret line="69" column="52" lean-forward="false" selection-start-line="69" selection-start-column="52" selection-end-line="69" selection-end-column="52" />
           <folding>
             <element signature="e#39#70#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Classes/Logic/OrderBookToArray.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="53" column="0" lean-forward="false" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

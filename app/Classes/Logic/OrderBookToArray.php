@@ -52,9 +52,20 @@ class OrderBookToArray
         krsort(self::$asks);
         }
 
+        $asks = [];
+        foreach (self::$asks as $key => $value){
+            array_push($asks, [(float)$key, $value]);
+        }
+        $bids = [];
+        foreach (self::$bids as $key => $value){
+            array_push($bids, [(float)$key, $value]);
+        }
+
         return([
-            'bids' => self::$bids,
-            'asks' => self::$asks
+            'asks' => $asks,
+            'bids' => $bids
+            //'bids' => self::$bids,
+            //'asks' => self::$asks
         ]);
     }
 

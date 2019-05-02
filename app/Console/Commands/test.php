@@ -51,25 +51,25 @@ class test extends Command
 
             if ($value){
 
-                $derebitData = $value['derebit']['params']['data']['bids'];
-                dump($value['cryptoFac']['asks']);
-                //dump($derebitData);
+                $derebitAsks = $value['derebit']['params']['data']['asks'];
+                $cryptoFacAsks = array_reverse($value['cryptoFac']['asks']);
+                $derebitBids = $value['derebit']['params']['data']['bids'];
+                $cryptoFacBids = $value['cryptoFac']['bids'];
 
-                $this->arr = [];
-                foreach ($value['cryptoFac']['asks'] as $key => $value){
-                    //dump($record);
-                    array_push($this->arr, [$key, $value]);
-                }
-
-                $arr2 = [];
+                $asksBooksData = [];
                 for ($i = 0; $i <= 9; $i++){
-                    array_push($arr2, [$derebitData[$i][0], $derebitData[$i][1], 3, 4]);
+                    array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1]]);
                 }
 
+                $bidsBooksData = [];
+                for ($i = 0; $i <= 9; $i++){
+                    array_push($bidsBooksData, [$derebitBids[$i][1], $derebitBids[$i][0], '', $cryptoFacBids[$i][1], $cryptoFacBids[$i][0]]);
+                }
 
-                $headers = ['Derebit: Price', 'Ask', 'CryptoFac: Price', 'Ask'];
-                //$this->table($headers, $derebitData);
-                $this->table($headers, $arr2);
+                $headers = ['Bid', 'Price', 'Ask', 'Bid', 'Price', 'Ask'];
+                $this->info('Derebit/CryptoFac books');
+                $this->table($headers, array_merge($asksBooksData, $bidsBooksData));
+
 
                 // $headers = ['CryptoFac: Price', 'Ask'];
                 // $this->table($headers, $this->arr);

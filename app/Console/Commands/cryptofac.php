@@ -101,6 +101,8 @@ class cryptofac extends Command
                         if ($jsonMessage['feed'] == 'book') OrderBookToArray::update($jsonMessage);
                         $this->orderBooksWatch->check('cryptoFac');
                         Cache::put('cryptoFacBook', OrderBookToArray::update($jsonMessage), now()->addMinute(1));
+
+                        //if ($jsonMessage['feed'] == 'book') dump(OrderBookToArray::update($jsonMessage));
                     }
 
                     // $arr = ['bids' => OrderBookToArray::$asks, 'asks' => OrderBookToArray::$bids];
