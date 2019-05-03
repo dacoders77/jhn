@@ -15,6 +15,18 @@ vendor/symfony/console/*
 vendor/symfony/console/Helper/*
 !vendor/symfony/console/Helper/ProgressBook.php
 
+
+
+vendor/symfony/console/*
+!vendor/symfony/console/Style/
+
+vendor/symfony/console/Style/*
+!vendor/symfony/console/Style/SymfonyStyle.php
+
+
+
+
+
 .env
 .phpunit.result.cache
 Homestead.json
