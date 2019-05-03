@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use Symfony\Component\Console\Helper\Table;
 
 /**
  * Cache listener loop.
@@ -45,7 +46,8 @@ class test extends Command
      */
     public function handle()
     {
-        // Cache::flush();
+        $bar = $this->output->createProgressBook(500, $this);
+        $i = 0;
         while (true){
             $value = Cache::pull('consoleRead');
 
@@ -68,22 +70,18 @@ class test extends Command
 
                 $headers = ['Bid', 'Price', 'Ask', 'Bid', 'Price', 'Ask'];
                 $this->info('Derebit/CryptoFac books');
-                $this->table($headers, array_merge($asksBooksData, $bidsBooksData));
+                //$this->table($headers, array_merge($asksBooksData, $bidsBooksData)); // Headers, table daata
+
+                    // ... do some work
+
+                    // advances the progress bar 1 unit
+                    $bar->advance(1, $headers, array_merge($asksBooksData, $bidsBooksData));
+                    usleep(1);
+                    // you can also advance the progress bar by more than 1 unit
+                    // $progressBar->advance(3);
 
 
-                // $headers = ['CryptoFac: Price', 'Ask'];
-                // $this->table($headers, $this->arr);
             }
-
-
-
-            $headers = ['Price', 'Ask'];
-            $data2 = [
-                ['5060', '100'],
-                ['5050', '10000'],
-                ['5040', '500'],
-                ['5030', '200']
-            ];
 
         }
 
