@@ -47,7 +47,6 @@ class test extends Command
     public function handle()
     {
         $bar = $this->output->createProgressBook(500, $this);
-        $i = 0;
         while (true){
             $value = Cache::pull('consoleRead');
 
