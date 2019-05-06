@@ -211,7 +211,25 @@ final class ProgressBook
      */
     private function overwrite(string $message): void
     {
+
         if ($this->overwrite) {
+            if (!$this->firstRun) {
+                // Erase previous lines
+                if ($this->formatLineCount > 0) {
+                    $message = str_repeat("\x1B[1A\x1B[2K", $this->formatLineCount).$message;
+                }
+                // Move the cursor to the beginning of the line and erase the line
+                $message = "\x0D\x1B[2K$message";
+            }
+        } elseif ($this->step > 0) {
+
+            $message = PHP_EOL.$message;
+        }
+
+        $this->firstRun = false;
+        $this->output->write($message);
+
+        /*if ($this->overwrite) {
             if (!$this->firstRun) {
                 if ($this->output instanceof ConsoleSectionOutput) {
                     $lines = floor(Helper::strlen($message) / $this->terminal->getWidth()) + $this->formatLineCount + 1;
@@ -232,7 +250,7 @@ final class ProgressBook
         }
 
         $this->firstRun = false;
-        $this->output->write($message);
+        $this->output->write($message);*/
     }
 
     private function determineBestFormat(): string

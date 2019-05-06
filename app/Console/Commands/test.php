@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Helper\TableStill;
 
 /**
  * Cache listener loop.
@@ -16,6 +17,7 @@ class test extends Command
 {
     private $isFirstRun = true;
     private $timeToCompare = null;
+
     /**
      * The name and signature of the console command.
      *
@@ -47,7 +49,12 @@ class test extends Command
      */
     public function handle()
     {
+
+        $this->output->write(sprintf("\033\143")); // Clear screen
+        //$this->tabeStill = new \App\Classes\ConsoleGraphics\TableStill($this->output);
+
         $bar = $this->output->createProgressBook(500, $this);
+
         while (true){
             $value = Cache::pull('consoleRead');
 
@@ -57,11 +64,10 @@ class test extends Command
             //dump(strtotime($time));
             //dd(strtotime($time . '1second'));
 
-
             if ($value){
 
                 if ($time > $this->timeToCompare || $this->isFirstRun){
-                    dump('ogogo');
+
                     $this->timeToCompare = $time + 0.1; // + sec
                     $this->isFirstRun = false;
 
@@ -81,8 +87,23 @@ class test extends Command
                     }
 
                     $headers = ['Bid', 'Price', 'Ask', 'Bid', 'Price', 'Ask'];
-                    //$this->info('Derebit/CryptoFac books');
-                    $this->table($headers, array_merge($asksBooksData, $bidsBooksData)); // Headers, table daata
+                    $rows = array_merge($asksBooksData, $bidsBooksData);
+                    // $this->table($headers, $rows); // Headers, table daata. Works good
+
+                    $tableStill = new \App\Classes\ConsoleGraphics\TableStill($this->output);
+                    if ($rows instanceof Arrayable) {
+                        $rows = $rows->toArray();
+                    }
+
+                    $tableStill->setHeaders((array) $headers)->setRows($rows)->setStyle('default');
+
+                    foreach ([] as $columnIndex => $columnStyle) {
+                        $tableStill->setColumnStyle($columnIndex, $columnStyle);
+                    }
+                    echo "\n"; // Added because the first line was flickering.
+                    $tableStill->render();
+
+
 
                     $bar->advance(1, $headers, array_merge($asksBooksData, $bidsBooksData));
                     usleep(1);
