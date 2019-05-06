@@ -217,7 +217,7 @@ final class ProgressBook
                     $lines = floor(Helper::strlen($message) / $this->terminal->getWidth()) + $this->formatLineCount + 1;
                     $this->output->clear($lines);
                 } else {
-                    $this->output->write(sprintf("\033\143")); // IT WORKS!
+                    $this->output->write(sprintf("\033\143")); // IT WORKS! CLEAR THE WHOLE SCREEN
                     // Erase previous lines
                     if ($this->formatLineCount > 0) {
                         $message = str_repeat("\x1B[1A\x1B[2K", $this->formatLineCount).$message;

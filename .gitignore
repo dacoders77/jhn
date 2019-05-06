@@ -22,8 +22,7 @@ vendor/symfony/console/*
 
 vendor/symfony/console/Style/*
 !vendor/symfony/console/Style/SymfonyStyle.php
-
-
+!vendor/symfony/console/Style/OutputStyle.php
 
 
 

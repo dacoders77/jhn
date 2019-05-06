@@ -14,7 +14,8 @@ use Symfony\Component\Console\Helper\Table;
  */
 class test extends Command
 {
-    private $arr = [];
+    private $isFirstRun = true;
+    private $timeToCompare = null;
     /**
      * The name and signature of the console command.
      *
@@ -50,40 +51,43 @@ class test extends Command
         while (true){
             $value = Cache::pull('consoleRead');
 
+            //$time = date("Y-m-d G:i:s", time());
+            $time = microtime(true);
+            //dump($time);
+            //dump(strtotime($time));
+            //dd(strtotime($time . '1second'));
+
+
             if ($value){
 
-                $derebitAsks = $value['derebit']['params']['data']['asks'];
-                $cryptoFacAsks = array_reverse($value['cryptoFac']['asks']);
-                $derebitBids = $value['derebit']['params']['data']['bids'];
-                $cryptoFacBids = $value['cryptoFac']['bids'];
+                if ($time > $this->timeToCompare || $this->isFirstRun){
+                    dump('ogogo');
+                    $this->timeToCompare = $time + 0.1; // + sec
+                    $this->isFirstRun = false;
 
-                $asksBooksData = [];
-                for ($i = 0; $i <= 9; $i++){
-                    array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1]]);
-                }
+                    $derebitAsks = $value['derebit']['params']['data']['asks'];
+                    $cryptoFacAsks = array_reverse($value['cryptoFac']['asks']);
+                    $derebitBids = $value['derebit']['params']['data']['bids'];
+                    $cryptoFacBids = $value['cryptoFac']['bids'];
 
-                $bidsBooksData = [];
-                for ($i = 0; $i <= 9; $i++){
-                    array_push($bidsBooksData, [$derebitBids[$i][1], $derebitBids[$i][0], '', $cryptoFacBids[$i][1], $cryptoFacBids[$i][0]]);
-                }
+                    $asksBooksData = [];
+                    for ($i = 0; $i <= 9; $i++){
+                        array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1]]);
+                    }
 
-                $headers = ['Bid', 'Price', 'Ask', 'Bid', 'Price', 'Ask'];
-                $this->info('Derebit/CryptoFac books');
-                //$this->table($headers, array_merge($asksBooksData, $bidsBooksData)); // Headers, table daata
+                    $bidsBooksData = [];
+                    for ($i = 0; $i <= 9; $i++){
+                        array_push($bidsBooksData, [$derebitBids[$i][1], $derebitBids[$i][0], '', $cryptoFacBids[$i][1], $cryptoFacBids[$i][0]]);
+                    }
 
-                    // ... do some work
+                    $headers = ['Bid', 'Price', 'Ask', 'Bid', 'Price', 'Ask'];
+                    //$this->info('Derebit/CryptoFac books');
+                    $this->table($headers, array_merge($asksBooksData, $bidsBooksData)); // Headers, table daata
 
-                    // advances the progress bar 1 unit
                     $bar->advance(1, $headers, array_merge($asksBooksData, $bidsBooksData));
                     usleep(1);
-                    // you can also advance the progress bar by more than 1 unit
-                    // $progressBar->advance(3);
-
-
+                }
             }
-
         }
-
     }
-
 }
