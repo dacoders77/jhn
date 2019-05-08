@@ -381,7 +381,8 @@ class TableStill
 
         // MOVE CURSOR to the begginig ood the line here?
         //dd('MOVE CURSOR to the begginig ood the line here?');
-        $this->output->write("\033[0;0f\033[?25l"); // \033[?25h
+        //$this->output->write("\033[0;0f\033[?25l"); // \033[?25h
+        $this->output->write("\033[0;0f");
         $this->cleanup();
         $this->rendered = true;
     }

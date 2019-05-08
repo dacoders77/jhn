@@ -238,7 +238,7 @@ final class ProgressBook
                     $this->output->write(sprintf("\033\143")); // IT WORKS! CLEAR THE WHOLE SCREEN
                     // Erase previous lines
                     if ($this->formatLineCount > 0) {
-                        $message = str_repeat("\x1B[1A\x1B[2K", $this->formatLineCount).$message;
+                            $message = str_repeat("\x1B[1A\x1B[2K", $this->formatLineCount).$message;
                     }
 
                     // Move the cursor to the beginning of the line and erase the line
