@@ -15,8 +15,12 @@ use Symfony\Component\Console\Helper\TableStill;
  */
 class test extends Command
 {
+    private $asksBooksData;
     private $isFirstRun = true;
     private $timeToCompare = null;
+    private $size;
+    private $hedgeSize;
+    private $accumSizeVolume = 0;
 
     /**
      * The name and signature of the console command.
@@ -51,51 +55,34 @@ class test extends Command
     {
 
         $this->output->write(sprintf("\033\143")); // Clear screen
-        //$this->tabeStill = new \App\Classes\ConsoleGraphics\TableStill($this->output);
-
         $bar = $this->output->createProgressBook(500, $this);
 
         while (true){
             $value = Cache::pull('consoleRead');
-
-            //$time = date("Y-m-d G:i:s", time());
             $time = microtime(true);
-            //dump($time);
-            //dump(strtotime($time));
-            //dd(strtotime($time . '1second'));
 
             if ($value){
-
-                if ($time > $this->timeToCompare || $this->isFirstRun){
+                if (true){
 
                     $this->timeToCompare = $time + 0.1; // + sec
                     $this->isFirstRun = false;
 
-                    $derebitAsks = $value['derebit']['params']['data']['asks'];
+                    $derebitAsks = array_reverse($value['derebit']['params']['data']['asks']);
                     $cryptoFacAsks = array_reverse($value['cryptoFac']['asks']);
 
                     $derebitBids = $value['derebit']['params']['data']['bids'];
                     $cryptoFacBids = $value['cryptoFac']['bids'];
 
-                    $size = 5000;
-                    $asksBooksData = [];
+                    $this->size = 200000;
+                    $this->asksBooksData = [];
                     for ($i = 0; $i <= 9; $i++){
 
-                        if($derebitAsks[9][1] > $size) {
-                            //                                     Bid  |   Price               | Ask |           * |Bid|           Price         | Ask |               *  | info
-                            if ($i == 0) array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'Size: ' . $size]);
-                            if ($i == 1) array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'leg1 > size: ' . ($derebitAsks[9][1] > $size ? 'true' : 'false')]);
-                            if ($i == 2 || $i == 3 || $i == 4 || $i == 5 || $i == 6 || $i == 7 || $i == 8) array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '']);
-                            if ($i == 9) array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '*', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], $size]);
-                            //if ($i != 0 || $i != 9) array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1]]);
-                        } else {
-                            if ($i == 0) array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'Size: ' . $size]);
-                            if ($i == 1) array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'leg1 > size: ' . ($derebitAsks[9][1] > $size ? 'true' : 'false')]);
-                            if ($i == 7) array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '*', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1]]);
-                            if ($i == 8) array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '*', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], $size]);
-                            if ($i == 9) array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '*', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1]]);
-                            if ($i == 2 || $i == 3 || $i == 4 || $i == 5 || $i == 6) array_push($asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '']);
-                        }
+                        //                                     Bid  |   Derebit Price         | Ask |           * |Bid|   CryptofacPrice         | Ask |                 * | info
+                        if ($i == 0) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'Spreads to buy: ' . $this->size ]);
+                        if ($i == 1) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'leg1 > size: ' . ($derebitAsks[9][1] > $this->size ? 'true' : 'false')]);
+                        if ($i == 2) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'Cur spread val: ' . ($cryptoFacAsks[9][0] - $derebitAsks[9][0])]);
+                        //if ($i == 9) array_push($this->$asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '*', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], $this->size]);
+                        if ($i == 3 || $i == 4 || $i == 5 || $i == 6 || $i == 7 || $i == 8 || $i == 9) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '']);
 
                     }
 
@@ -104,10 +91,15 @@ class test extends Command
                         array_push($bidsBooksData, [$derebitBids[$i][1], $derebitBids[$i][0], '', '', $cryptoFacBids[$i][1], $cryptoFacBids[$i][0]]);
                     }
 
+                    if($derebitAsks[9][1] > $this->size) {
+                        //$this->output->write(sprintf("\033\143")); // Clear screen
+                        //die('jopa');
+                    }
+                    $this->derebitAsteriskFill();
 
 
-                    $headers = ['Bid', 'Price', 'Ask', '*', 'Bid', 'Price', 'Ask', '*', 'info'];
-                    $rows = array_merge($asksBooksData, $bidsBooksData);
+                    $headers = ["Bid. L1-D", 'Price', 'Ask', '*', 'Bid L2-C', 'Price', 'Ask', '*', 'info'];
+                    $rows = array_merge($this->asksBooksData, $bidsBooksData);
 
                     $tableStill = new \App\Classes\ConsoleGraphics\TableStill($this->output);
                     /*if ($rows instanceof Arrayable) {
@@ -123,10 +115,40 @@ class test extends Command
                     echo "\n"; // Added because the first line was flickering.
                     $tableStill->render();
 
-
                     usleep(1);
                 }
             }
         }
+    }
+
+    private function derebitAsteriskFill(){
+        //$this->output->write(sprintf("\033\143")); // Clear screen
+        $accumulatedVolume = 0;
+        $this->hedgeSize = 0;
+        for($i = 9; $i >= 0; $i--) {
+
+            $this->hedgeSize = $this->hedgeSize + $this->asksBooksData[$i][2];// $this->size - ($this->hedgeSize - $this->asksBooksData[$i][2]);
+
+            if ($this->hedgeSize <= $this->size) {
+
+                $accumulatedVolume = $accumulatedVolume + $this->asksBooksData[$i][2];
+                $this->asksBooksData[$i][3] = $this->asksBooksData[$i][2];
+                //echo $i . " " . $this->asksBooksData[$i][1] . " " . $this->asksBooksData[$i][3] . " " . ($this->asksBooksData[$i][1] * $this->asksBooksData[$i][3]) ."\n";
+                $this->accumSizeVolume = $this->accumSizeVolume + ($this->asksBooksData[$i][1] * $this->asksBooksData[$i][3]);
+            } else {
+                $this->asksBooksData[$i][3] = $this->size - $accumulatedVolume;
+                $this->accumSizeVolume = ($this->accumSizeVolume + ($this->asksBooksData[$i][1] * $this->asksBooksData[$i][3])) / $this->size;
+                //echo $i . " " . $this->asksBooksData[$i][1] . " " . $this->asksBooksData[$i][3] .  " " . ($this->asksBooksData[$i][1] * $this->asksBooksData[$i][3]) . "\n\n";
+                //echo "result: " . $this->accumSizeVolume . "\n\n";
+                $this->asksBooksData[3][9] = "WVAP: " . $this->accumSizeVolume;
+                break;
+            }
+        }
+
+        for($i = 0; $i <= 9; $i++){
+            //echo $i . " " . $this->asksBooksData[$i][1] . "      " . $this->asksBooksData[$i][2] . "        " . $this->asksBooksData[$i][3] . "\n";
+        }
+
+        //die();
     }
 }
