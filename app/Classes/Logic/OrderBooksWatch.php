@@ -12,7 +12,9 @@ use App\Console\Commands\derebit;
 use Illuminate\Support\Facades\Cache;
 
 /**
- * Called from Derebit and Cryptofac WS listeners
+ * Called from Derebit and Cryptofac WS listeners.
+ * Wait until both books are received then put them to cache with key 'consoleRead'.
+ * This is a simple que implementation. Then this value is read by the consumption thread.
  *
  * Class OrderBooksWatch
  * @package App\Classes\Logic
@@ -36,15 +38,11 @@ class OrderBooksWatch
                 'derebit' => Cache::get('derebitBook'),
                 'cryptoFac' => Cache::get('cryptoFacBook')
             ];
-
-
             Cache::put('consoleRead', $this->books, now()->addMinute(1));
         }
         else {
             Cache::put('consoleRead', 'Not both books. Current book: ' . $leg, now()->addMinute(1));
         }
-
-
 
         /*// if (derebit && Cryptofas) => execute
         if (Cache::get('cryptoFac')){

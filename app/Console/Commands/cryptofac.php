@@ -98,20 +98,15 @@ class cryptofac extends Command
 
                     }
                     if (array_key_exists('feed', $jsonMessage) && array_key_exists('side', $jsonMessage)) {
+
                         if ($jsonMessage['feed'] == 'book') OrderBookToArray::update($jsonMessage);
+
                         $this->orderBooksWatch->check('cryptoFac');
                         Cache::put('cryptoFacBook', OrderBookToArray::update($jsonMessage), now()->addMinute(1));
 
+
                         //if ($jsonMessage['feed'] == 'book') dump(OrderBookToArray::update($jsonMessage));
                     }
-
-                    // $arr = ['bids' => OrderBookToArray::$asks, 'asks' => OrderBookToArray::$bids];
-                    // dump($arr);
-
-                    // Cryptofac order book needs to be parsed. Because the they send updates insted of a book.
-                    //Cache::put('cryptoFac', $jsonMessage, now()->addMinute(5)); // Clear the cache. Assigned value Expires in 5 minutes
-                    //$this->orderBooksWatch->check("cryptoFac");
-
                 });
 
                 $conn->on('close', function($code = null, $reason = null) use ($loop) {

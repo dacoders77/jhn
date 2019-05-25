@@ -7,6 +7,7 @@
  */
 
 namespace App\Classes\Logic;
+use App\Classes\LogToFile;
 
 /**
  * Parse Cryptofac order book.
@@ -15,6 +16,7 @@ namespace App\Classes\Logic;
  *
  * Class OrderBookToArray
  * @package App\Classes\Logic
+ * @return array
  */
 class OrderBookToArray
 {
@@ -40,7 +42,7 @@ class OrderBookToArray
             } else {
                 self::$bids[$orderBookDeltaUpdate['price']] = $orderBookDeltaUpdate['qty']; // Find the key, update the value
             }
-        krsort(self::$bids);
+        if (self::$bids) krsort(self::$bids);
         }
 
         if ($orderBookDeltaUpdate['side'] == 'sell'){ // && self::$bids
@@ -49,14 +51,18 @@ class OrderBookToArray
             } else {
                 self::$asks[$orderBookDeltaUpdate['price']] = $orderBookDeltaUpdate['qty'];
             }
-        krsort(self::$asks);
+        if (self::$asks) krsort(self::$asks);
         }
 
         $asks = [];
+        //LogToFile::add(__FILE__ . ' asks: ', json_encode(self::$bids));
+        if (self::$asks)
         foreach (self::$asks as $key => $value){
             array_push($asks, [(float)$key, $value]);
         }
         $bids = [];
+        if (self::$bids)
+        //LogToFile::add(__FILE__ . ' bids: ', json_encode(self::$bids));
         foreach (self::$bids as $key => $value){
             array_push($bids, [(float)$key, $value]);
         }
@@ -64,12 +70,6 @@ class OrderBookToArray
         return([
             'asks' => $asks,
             'bids' => $bids
-            //'bids' => self::$bids,
-            //'asks' => self::$asks
         ]);
-    }
-
-    private function updateBook(){
-        //
     }
 }

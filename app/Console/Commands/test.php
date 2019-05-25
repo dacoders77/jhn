@@ -20,14 +20,15 @@ class test extends Command
     private $timeToCompare = null;
     private $size;
     private $hedgeSize;
-    private $accumSizeVolume = 0;
+    private $accumSizeVolume;
+    private $limitOrderCorrection;
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'test';
+    protected $signature = 'test {volume}';
 
     /**
      * The console command description.
@@ -55,7 +56,7 @@ class test extends Command
     {
 
         $this->output->write(sprintf("\033\143")); // Clear screen
-        $bar = $this->output->createProgressBook(500, $this);
+        //$bar = $this->output->createProgressBook(500, $this);
 
         while (true){
             $value = Cache::pull('consoleRead');
@@ -73,16 +74,20 @@ class test extends Command
                     $derebitBids = $value['derebit']['params']['data']['bids'];
                     $cryptoFacBids = $value['cryptoFac']['bids'];
 
-                    $this->size = 200000;
+                    $this->size = $this->argument('volume');
                     $this->asksBooksData = [];
                     for ($i = 0; $i <= 9; $i++){
 
                         //                                     Bid  |   Derebit Price         | Ask |           * |Bid|   CryptofacPrice         | Ask |                 * | info
                         if ($i == 0) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'Spreads to buy: ' . $this->size ]);
                         if ($i == 1) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'leg1 > size: ' . ($derebitAsks[9][1] > $this->size ? 'true' : 'false')]);
-                        if ($i == 2) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'Cur spread val: ' . ($cryptoFacAsks[9][0] - $derebitAsks[9][0])]);
-                        //if ($i == 9) array_push($this->$asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '*', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], $this->size]);
-                        if ($i == 3 || $i == 4 || $i == 5 || $i == 6 || $i == 7 || $i == 8 || $i == 9) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '']);
+                        if ($i == 2) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'Cur  sprd val: ' . ($cryptoFacAsks[9][0] - $derebitAsks[9][0])]);
+                        // WVAP spread
+                        if ($i == 3) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'WVAP sprd val: ' . ($cryptoFacAsks[9][0] - $this->accumSizeVolume)]);
+                        // Correction
+                        $this->limitOrderCorrection = round((($cryptoFacAsks[9][0] - $derebitAsks[9][0]) - ($cryptoFacAsks[9][0] - $this->accumSizeVolume)) * 2) / 2;
+                        if ($i == 4) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '', 'Correction   : ' . $this->limitOrderCorrection ]);
+                        if ($i == 5 || $i == 6 || $i == 7 || $i == 8 || $i == 9) array_push($this->asksBooksData, [$i, $derebitAsks[$i][0], $derebitAsks[$i][1], '', '', $cryptoFacAsks[$i][0], $cryptoFacAsks[$i][1], '']);
 
                     }
 
@@ -93,24 +98,16 @@ class test extends Command
 
                     if($derebitAsks[9][1] > $this->size) {
                         //$this->output->write(sprintf("\033\143")); // Clear screen
-                        //die('jopa');
                     }
+
                     $this->derebitAsteriskFill();
+                    $this->cryptoFacAsteriskFill($this->limitOrderCorrection);
 
-
-                    $headers = ["Bid. L1-D", 'Price', 'Ask', '*', 'Bid L2-C', 'Price', 'Ask', '*', 'info'];
+                    $headers = ["Bid. L1-D", 'Price     ', 'Ask     ', '*     ', 'Bid L2-C', 'Price     ', 'Ask     ', '*     ', 'info                                 '];
                     $rows = array_merge($this->asksBooksData, $bidsBooksData);
 
                     $tableStill = new \App\Classes\ConsoleGraphics\TableStill($this->output);
-                    /*if ($rows instanceof Arrayable) {
-                        $rows = $rows->toArray();
-                    }*/
-
                     $tableStill->setHeaders((array) $headers)->setRows($rows)->setStyle('default');
-
-                    /*foreach ([] as $columnIndex => $columnStyle) {
-                        $tableStill->setColumnStyle($columnIndex, $columnStyle);
-                    }*/
 
                     echo "\n"; // Added because the first line was flickering.
                     $tableStill->render();
@@ -122,7 +119,6 @@ class test extends Command
     }
 
     private function derebitAsteriskFill(){
-        //$this->output->write(sprintf("\033\143")); // Clear screen
         $accumulatedVolume = 0;
         $this->hedgeSize = 0;
         for($i = 9; $i >= 0; $i--) {
@@ -130,25 +126,24 @@ class test extends Command
             $this->hedgeSize = $this->hedgeSize + $this->asksBooksData[$i][2];// $this->size - ($this->hedgeSize - $this->asksBooksData[$i][2]);
 
             if ($this->hedgeSize <= $this->size) {
-
                 $accumulatedVolume = $accumulatedVolume + $this->asksBooksData[$i][2];
                 $this->asksBooksData[$i][3] = $this->asksBooksData[$i][2];
-                //echo $i . " " . $this->asksBooksData[$i][1] . " " . $this->asksBooksData[$i][3] . " " . ($this->asksBooksData[$i][1] * $this->asksBooksData[$i][3]) ."\n";
                 $this->accumSizeVolume = $this->accumSizeVolume + ($this->asksBooksData[$i][1] * $this->asksBooksData[$i][3]);
             } else {
                 $this->asksBooksData[$i][3] = $this->size - $accumulatedVolume;
                 $this->accumSizeVolume = ($this->accumSizeVolume + ($this->asksBooksData[$i][1] * $this->asksBooksData[$i][3])) / $this->size;
-                //echo $i . " " . $this->asksBooksData[$i][1] . " " . $this->asksBooksData[$i][3] .  " " . ($this->asksBooksData[$i][1] * $this->asksBooksData[$i][3]) . "\n\n";
-                //echo "result: " . $this->accumSizeVolume . "\n\n";
-                $this->asksBooksData[3][9] = "WVAP: " . $this->accumSizeVolume;
+                $this->asksBooksData[5][9] = "WVAP: " . $this->accumSizeVolume;
                 break;
             }
         }
+    }
 
-        for($i = 0; $i <= 9; $i++){
-            //echo $i . " " . $this->asksBooksData[$i][1] . "      " . $this->asksBooksData[$i][2] . "        " . $this->asksBooksData[$i][3] . "\n";
+    private function cryptoFacAsteriskFill($limitOrderCorrection){
+        // Correction can be negative. In this case wrong row is added to the table
+        if($limitOrderCorrection <= 5 && $limitOrderCorrection > 0){
+            $this->asksBooksData[10 - $limitOrderCorrection * 2][7] = $this->size; // $this->size
+        } else{
+            $this->asksBooksData[9][7] = $this->size; // If correction is more than 5 - we can not show it in the table, we have 0.5 * 2 rows.
         }
-
-        //die();
     }
 }
