@@ -54,7 +54,6 @@ class test extends Command
      */
     public function handle()
     {
-
         $this->output->write(sprintf("\033\143")); // Clear screen
         //$bar = $this->output->createProgressBook(500, $this);
 

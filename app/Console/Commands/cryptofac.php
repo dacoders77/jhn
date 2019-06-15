@@ -90,22 +90,26 @@ class cryptofac extends Command
                 $this->connection = $conn; // In order to use $conn outside of this function
                 $conn->on('message', function(\Ratchet\RFC6455\Messaging\MessageInterface $socketMessage) use ($conn, $loop) {
                     $jsonMessage = json_decode($socketMessage->getPayload(), true);
-                    dump($jsonMessage);
 
+                    /**
+                     * The first message is an order book snapshot.
+                     * It contains two collections: bids and asks.
+                     * If there is a 'bids' key - this is a snapshot. 'asks'  will be there as well.
+                     */
                     if (array_key_exists('bids', $jsonMessage)) {
+                        // Get the snapshot and make arrays out of it.
+                        // This array will contain two collections is it: bids and asks.
+                        // On update message these collections will be modified.
                         OrderBookToArray::parse($jsonMessage);
                         Cache::put('isCryptoFacOrderBookReceived', true, now()->addDay(1));
 
                     }
                     if (array_key_exists('feed', $jsonMessage) && array_key_exists('side', $jsonMessage)) {
-
+                        // Update order book array
                         if ($jsonMessage['feed'] == 'book') OrderBookToArray::update($jsonMessage);
 
                         $this->orderBooksWatch->check('cryptoFac');
                         Cache::put('cryptoFacBook', OrderBookToArray::update($jsonMessage), now()->addMinute(1));
-
-
-                        //if ($jsonMessage['feed'] == 'book') dump(OrderBookToArray::update($jsonMessage));
                     }
                 });
 
